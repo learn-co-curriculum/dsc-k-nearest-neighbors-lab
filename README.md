@@ -29,17 +29,6 @@ In the cell below:
 * Create an class called `KNN`.
 * This class should contain two empty methods--`fit`, and `predict`. (Set the body of both of these methods to `pass`)
 
-
-```python
-class KNN(object):
-    
-    def fit():
-        pass
-    
-    def predict():
-        pass
-```
-
 ### Completing the `fit` Method
 
 Recall from our previous lesson on KNN that when "fitting" a KNN classifier, all we're really doing is storing the points and their corresponding labels. There's no actual "fitting" involved here, since all we can do is store the data so that we can use it to calculate the nearest nighbors when the `predict` method is called.
@@ -55,8 +44,7 @@ In the cell below, complete the `fit` method.
 
 ```python
 def fit(self, X_train, y_train):
-    self.X_train = X_train
-    self.y_train = y_train
+    pass
     
 # This line updates the knn.fit method to point to the function we've just written
 KNN.fit = fit
@@ -78,11 +66,7 @@ In the cell below, complete the `_get_distances()` function. This function shoul
 
 ```python
 def _get_distances(self, x):
-    distances = []
-    for ind, val in enumerate(self.X_train):
-        dist_to_i = euc(x, val)
-        distances.append((ind, dist_to_i))
-    return distances
+    pass
 
 # This line attaches the function we just created as a method to our KNN class.
 KNN._get_distances = _get_distances
@@ -104,8 +88,7 @@ In the cell below, complete the `_get_k_nearest` function.  This function should
 
 ```python
 def _get_k_nearest(self, dists, k):
-    sorted_dists = sorted(dists, key=lambda x: x[1])
-    return sorted_dists[:k]
+    pass
 
 # This line attaches the function we just created as a method to our KNN class.
 KNN._get_k_nearest = _get_k_nearest
@@ -122,10 +105,7 @@ Complete the `_get_label_prediction()` function in the cell below. This function
 
 ```python
 def _get_label_prediction(self, k_nearest):
-        
-    labels = [self.y_train[i] for i, _ in k_nearest]
-    counts = np.bincount(labels)
-    return np.argmax(counts)
+    pass
 
 # This line attaches the function we just created as a method to our KNN class.
 KNN._get_label_prediction = _get_label_prediction
@@ -161,15 +141,7 @@ Follow these instructions to complete the `predict()` method in the cell below!
 
 ```python
 def predict(self, X_test, k=3):
-    preds = []
-    # Iterate through each item in X_test
-    for i in X_test:
-        # Get distances between i and each item in X_train
-        dists = self._get_distances(i)
-        k_nearest = self._get_k_nearest(dists, k)
-        predicted_label = self._get_label_prediction(k_nearest)
-        preds.append(predicted_label)
-    return preds
+    pass
         
 KNN.predict = predict
 ```
@@ -197,33 +169,29 @@ Now, you'll need to use `train_test_split` to split our training data into train
 
 
 ```python
-X_train, X_test, y_train, y_test = train_test_split(data, target, test_size=0.25)
+X_train, X_test, y_train, y_test = None
 ```
 
 Now, instantiate a knn object, and `fit` it to the data in `X_train` and the labels in `y_train`.
 
 
 ```python
-knn = KNN()
-knn.fit(X_train, y_train)
+knn = None
 ```
 
 Now, we'll create some predictions on our testing data.  In the cell below, use the `.predict()` method to generate predictions for the data stored in `X_test`.
 
 
 ```python
-preds = knn.predict(X_test)
+preds = None
 ```
 
 And now, for the moment of truth! Let's test the accuracy of our predictions. In the cell below, complete the call to `accuracy_score` by passing in `y_test` and our `preds`!
 
 
 ```python
-print("Testing Accuracy: {}".format(accuracy_score(y_test, preds)))
+print("Testing Accuracy: {}".format(accuracy_score(None, None)))
 # Expected Output: Testing Accuracy: 0.9736842105263158
 ```
-
-    Testing Accuracy: 0.9736842105263158
-    
 
 Over 97% accuracy! Not bad for a handwritten machine learning classifier!
