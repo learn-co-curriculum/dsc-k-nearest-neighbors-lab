@@ -11,7 +11,7 @@ You will be able to:
 
 * Implement a basic KNN algorithm from scratch
 
-### Getting Started
+## Getting Started
 
 We'll begin this lab by creating our classifier.  To keep things simple, we'll be using a helper function from the scipy library to calcluate euclidean distance for us--specifically, the `euclidean()` function from the `scipy.spatial.distance` module. Import this function in the cell below.
 
@@ -29,7 +29,7 @@ In the cell below:
 * Create an class called `KNN`.
 * This class should contain two empty methods--`fit`, and `predict`. (Set the body of both of these methods to `pass`)
 
-### Completing the `fit` Method
+## Completing the `fit` Method
 
 Recall from our previous lesson on KNN that when "fitting" a KNN classifier, all we're really doing is storing the points and their corresponding labels. There's no actual "fitting" involved here, since all we can do is store the data so that we can use it to calculate the nearest nighbors when the `predict` method is called.
 
@@ -50,7 +50,7 @@ def fit(self, X_train, y_train):
 KNN.fit = fit
 ```
 
-#### Helper Functions
+### Helper Functions
 
 Next, we'll write two helper functions to make things easier for us when completing the `predict` function. The first helper function we'll write return an array containing the distance between a point we pass in and every point inside of `X_train`. 
 
@@ -113,7 +113,7 @@ KNN._get_label_prediction = _get_label_prediction
 
 Great! Now, we need to complete the `predict` method. This will be much simpler, now that we have some 
 
-### Completing the `predict` Method
+## Completing the `predict` Method
 
 This method does all the heavy lifting for KNN, so this will be a bit more complex than our `fit` method. Let's examine how this method should work, so that we'll have a better idea of how to write it.
 
@@ -148,7 +148,7 @@ KNN.predict = predict
 
 Great! Now, let's try out our new KNN classifier on a sample dataset to see how well it works!
 
-### Testing Our KNN Classifier
+## Testing Our KNN Classifier
 
 In order to test the performance of our model, we're going to import the **_Iris Dataset_**. Specifically, we'll use the `load_iris` function, which can be found inside of the `sklearn.datasets` module. We'll then call this function, and use the object it returns. We'll also import `train_test_split` from `sklearn.model_selection`, as well as `accuracy_score` from `sklearn.metrics`.  Note that there are **_3 classes_** in the Iris Dataset, making this a multicategorical classification problem. This means that we can't use evaluation metrics that are meant for binary classification problems. For this, we'll just stick to accuracy. 
 
@@ -195,3 +195,7 @@ print("Testing Accuracy: {}".format(accuracy_score(None, None)))
 ```
 
 Over 97% accuracy! Not bad for a handwritten machine learning classifier!
+
+## Summary
+
+That was great! In what's next, you'll dive a little deeper into evaluating performance of a KNN algorithm!
