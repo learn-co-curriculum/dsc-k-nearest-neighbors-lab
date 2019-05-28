@@ -3,7 +3,7 @@
 
 ## Introduction
 
-In this lesson, we'll build a simple version of a **_K-Nearest Neigbors Classifier_** from scratch, and train it to make predictions on a dataset!
+In this lesson, you'll build a simple version of a **_K-Nearest Neigbors Classifier_** from scratch, and train it to make predictions on a dataset!
 
 ## Objectives
 
@@ -13,7 +13,7 @@ You will be able to:
 
 ## Getting Started
 
-We'll begin this lab by creating our classifier.  To keep things simple, we'll be using a helper function from the scipy library to calcluate euclidean distance for us--specifically, the `euclidean()` function from the `scipy.spatial.distance` module. Import this function in the cell below.
+You'll begin this lab by creating a classifier. To keep things simple, you'll be using a helper function from the scipy library to calcluate euclidean distance&mdash;specifically, the `euclidean()` function from the `scipy.spatial.distance` module. Import this function in the cell below.
 
 
 ```python
@@ -22,7 +22,7 @@ import numpy as np
 np.random.seed(0)
 ```
 
-Great! Now, we'll need to define our `KNN` class. Since we don't need to do anything at initialization, we don't need to modify the `__init__` method at all.
+Great! Now, you need to define a `KNN` class. Since you don't need to do anything at initialization, you don't need to modify the `__init__` method at all.
 
 In the cell below:
 
@@ -42,9 +42,9 @@ class KNN(object):
 
 ## Completing the `fit` Method
 
-Recall from our previous lesson on KNN that when "fitting" a KNN classifier, all we're really doing is storing the points and their corresponding labels. There's no actual "fitting" involved here, since all we can do is store the data so that we can use it to calculate the nearest nighbors when the `predict` method is called.
+Recall that when "fitting" a KNN classifier, all you're really doing is storing the points and their corresponding labels. There's no actual "fitting" involved here, since all you can do is store the data so that you can use it to calculate the nearest nighbors when the `predict` method is called.
 
-Our inputs for this function should be:
+The inputs for this function should be:
 
 * `self`, since this will be an instance method inside the `KNN` class.
 * `X_train`--A 2-dimensional array. Each of the internal arrays represents a _vector_ for a given point in space. 
@@ -64,7 +64,7 @@ KNN.fit = fit
 
 ### Helper Functions
 
-Next, we'll write two helper functions to make things easier for us when completing the `predict` function. The first helper function we'll write return an array containing the distance between a point we pass in and every point inside of `X_train`. 
+Next, write two helper functions to make things easier when completing the `predict` function. The first helper function should return an array containing the distance between a point we pass in and every point inside of `X_train`. 
 
 In the cell below, complete the `_get_distances()` function. This function should:
 
@@ -88,7 +88,7 @@ def _get_distances(self, x):
 KNN._get_distances = _get_distances
 ```
 
-Great! The second big challenge in a `predict` method is getting the indices of the k-nearest points. To keep our coming `predict` method nice and clean, we'll abstract this functionality into a helper method called `_get_k_nearest`.  
+Great! The second big challenge in a `predict` method is getting the indices of the k-nearest points. To keep our coming `predict` method nice and clean, abstract this functionality into a helper method called `_get_k_nearest`.  
 
 In the cell below, complete the `_get_k_nearest` function.  This function should:
 
@@ -99,7 +99,7 @@ In the cell below, complete the `_get_k_nearest` function.  This function should
 * Sort our `dists` array by distances values, which are the second element in each tuple
 * Return the first `k` tuples from then (now sorted) `dists` array.
 
-**_Hint:_** To easily sort on the second item in the tuples contained within the `dists` array, use the `sorted` function and pass in lambda for the `key=` parameter. To sort on the second element of each tuple, we can just use `key=lambda x: x[1]`!
+**_Hint:_** To easily sort on the second item in the tuples contained within the `dists` array, use the `sorted` function and pass in lambda for the `key=` parameter. To sort on the second element of each tuple, you can just use `key=lambda x: x[1]`!
 
 
 ```python
@@ -111,7 +111,7 @@ def _get_k_nearest(self, dists, k):
 KNN._get_k_nearest = _get_k_nearest
 ```
 
-Now, we have helper functions to help us get the distances, and then get the k-nearest neighbors based on those distances. The final helper function we'll create will help us get the labels that correspond to each of the k-nearest point, and return the class that occurs the most. 
+Now, you have helper functions to help you get the distances, and then get the k-nearest neighbors based on those distances. The final helper function you'll create will get the labels that correspond to each of the k-nearest point, and return the class that occurs the most. 
 
 Complete the `_get_label_prediction()` function in the cell below. This function should:
 
@@ -131,16 +131,16 @@ def _get_label_prediction(self, k_nearest):
 KNN._get_label_prediction = _get_label_prediction
 ```
 
-Great! Now, we need to complete the `predict` method. This will be much simpler, now that we have some 
+Great! Now, you need to complete a `predict` method.
 
 ## Completing the `predict` Method
 
-This method does all the heavy lifting for KNN, so this will be a bit more complex than our `fit` method. Let's examine how this method should work, so that we'll have a better idea of how to write it.
+This method does all the heavy lifting for KNN, so this will be a bit more complex than the `fit` method. Here's a rough outline of how the method should work:
 
 1. The function takes in an array of vectors that we want predictions for.
 1. For each vector that we want to make a prediction for: 
-    1a. The classifier calculates the distance between that vector and every other vector in our training set. 
-    1b. The classifier identifies the K nearest vectors to the vector we want a prediction for.
+    1a. The classifier calculates the distance between that vector and every other vector in the training set. 
+    1b. The classifier identifies the K nearest vectors to the vector you want a prediction for.
     1c. The classifier determines which label the majority of the K nearest neighbors share, and appends this prediction to an array we will output. The index of the prediction in this array should be the same as the index of the point that it corresponds to (e.g. `pred[0]` is the prediction for `X_test[0]`).
 2. Once predictions have been generated for every vector in question, return the array of predictions. 
 
@@ -149,7 +149,7 @@ This tells us a few things about what our `predict` function will need to be abl
 * In addition to `self`, our `predict` function should take in two arguments: 
     * `X_test`, the points we want to classify
     * `k`, which specifies the number of neighbors we should use to make the classification.  We'll set `k=3` as a default, but allow the user to update it if they choose.
-* Our method will need to iterate through every item in `X_test`. For each item:
+* Your method will need to iterate through every item in `X_test`. For each item:
     * Calculate the distance to all points in `X_train` by using our `_get_distances()` helper method we created.
     * Find the k-nearest points in `X_train` by using the `_get_k_nearest()` helper method we created
     * Use the index values contained within the tuples returned by `_get_k_nearest()` to get the corresponding labels for each of the nearest points. 
@@ -174,13 +174,13 @@ def predict(self, X_test, k=3):
 KNN.predict = predict
 ```
 
-Great! Now, let's try out our new KNN classifier on a sample dataset to see how well it works!
+Great! Now, try out your new KNN classifier on a sample dataset to see how well it works!
 
 ## Testing Our KNN Classifier
 
-In order to test the performance of our model, we're going to import the **_Iris Dataset_**. Specifically, we'll use the `load_iris` function, which can be found inside of the `sklearn.datasets` module. We'll then call this function, and use the object it returns. We'll also import `train_test_split` from `sklearn.model_selection`, as well as `accuracy_score` from `sklearn.metrics`.  Note that there are **_3 classes_** in the Iris Dataset, making this a multicategorical classification problem. This means that we can't use evaluation metrics that are meant for binary classification problems. For this, we'll just stick to accuracy. 
+In order to test the performance of yur model, import the **_Iris Dataset_**. Specifically, use the `load_iris` function, which can be found inside of the `sklearn.datasets` module. Then call this function, and use the object it returns. Also import `train_test_split` from `sklearn.model_selection`, as well as `accuracy_score` from `sklearn.metrics`.  Note that there are **_3 classes_** in the Iris Dataset, making this a multi-categorical classification problem. This means that you can't use evaluation metrics that are meant for binary classification problems. For this, just stick to accuracy for now. 
 
-Run the cell below to import everything we'll need from sklearn to test our model. 
+Run the cell below to import everything you'll need from sklearn to test our model. 
 
 
 ```python
@@ -208,14 +208,14 @@ knn = KNN()
 knn.fit(X_train, y_train)
 ```
 
-Now, we'll create some predictions on our testing data.  In the cell below, use the `.predict()` method to generate predictions for the data stored in `X_test`.
+Now, create some predictions on the test data.  In the cell below, use the `.predict()` method to generate predictions for the data stored in `X_test`.
 
 
 ```python
 preds = knn.predict(X_test)
 ```
 
-And now, for the moment of truth! Let's test the accuracy of our predictions. In the cell below, complete the call to `accuracy_score` by passing in `y_test` and our `preds`!
+And now, for the moment of truth! Test the accuracy of your predictions. In the cell below, complete the call to `accuracy_score` by passing in `y_test` and our `preds`!
 
 
 ```python
@@ -230,4 +230,4 @@ Over 97% accuracy! Not bad for a handwritten machine learning classifier!
 
 ## Summary
 
-That was great! In what's next, you'll dive a little deeper into evaluating performance of a KNN algorithm!
+That was great! Next, you'll dive a little deeper into evaluating performance of a KNN algorithm!
