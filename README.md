@@ -13,7 +13,7 @@ You will be able to:
 
 ## Getting Started
 
-You'll begin this lab by creating a classifier. To keep things simple, you'll be using a helper function from the scipy library to calcluate euclidean distance&mdash;specifically, the `euclidean()` function from the `scipy.spatial.distance` module. Import this function in the cell below.
+You'll begin this lab by creating a classifier. To keep things simple, you'll be using a helper function from the scipy library to calculate euclidean distance&mdash;specifically, the `euclidean()` function from the `scipy.spatial.distance` module. Import this function in the cell below.
 
 
 ```python
@@ -42,7 +42,7 @@ class KNN(object):
 
 ## Completing the `fit` Method
 
-Recall that when "fitting" a KNN classifier, all you're really doing is storing the points and their corresponding labels. There's no actual "fitting" involved here, since all you can do is store the data so that you can use it to calculate the nearest nighbors when the `predict` method is called.
+Recall that when "fitting" a KNN classifier, all you're really doing is storing the points and their corresponding labels. There's no actual "fitting" involved here, since all you can do is store the data so that you can use it to calculate the nearest neighbors when the `predict` method is called.
 
 The inputs for this function should be:
 
