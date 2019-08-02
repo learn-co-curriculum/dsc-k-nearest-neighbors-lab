@@ -22,12 +22,37 @@ import numpy as np
 np.random.seed(0)
 ```
 
+
+```python
+# __SOLUTION__ 
+from scipy.spatial.distance import euclidean as euc
+import numpy as np
+np.random.seed(0)
+```
+
 Great! Now, you need to define a `KNN` class. Since you don't need to do anything at initialization, you don't need to modify the `__init__` method at all.
 
 In the cell below:
 
 * Create an class called `KNN`.
 * This class should contain two empty methods--`fit`, and `predict`. (Set the body of both of these methods to `pass`)
+
+
+```python
+
+```
+
+
+```python
+# __SOLUTION__ 
+class KNN(object):
+    
+    def fit():
+        pass
+    
+    def predict():
+        pass
+```
 
 ## Completing the `fit` Method
 
@@ -45,6 +70,17 @@ In the cell below, complete the `fit` method.
 ```python
 def fit(self, X_train, y_train):
     pass
+    
+# This line updates the knn.fit method to point to the function we've just written
+KNN.fit = fit
+```
+
+
+```python
+# __SOLUTION__ 
+def fit(self, X_train, y_train):
+    self.X_train = X_train
+    self.y_train = y_train
     
 # This line updates the knn.fit method to point to the function we've just written
 KNN.fit = fit
@@ -72,6 +108,20 @@ def _get_distances(self, x):
 KNN._get_distances = _get_distances
 ```
 
+
+```python
+# __SOLUTION__ 
+def _get_distances(self, x):
+    distances = []
+    for ind, val in enumerate(self.X_train):
+        dist_to_i = euc(x, val)
+        distances.append((ind, dist_to_i))
+    return distances
+
+# This line attaches the function we just created as a method to our KNN class.
+KNN._get_distances = _get_distances
+```
+
 Great! The second big challenge in a `predict` method is getting the indices of the k-nearest points. To keep our coming `predict` method nice and clean, abstract this functionality into a helper method called `_get_k_nearest`.  
 
 In the cell below, complete the `_get_k_nearest` function.  This function should:
@@ -94,6 +144,17 @@ def _get_k_nearest(self, dists, k):
 KNN._get_k_nearest = _get_k_nearest
 ```
 
+
+```python
+# __SOLUTION__ 
+def _get_k_nearest(self, dists, k):
+    sorted_dists = sorted(dists, key=lambda x: x[1])
+    return sorted_dists[:k]
+
+# This line attaches the function we just created as a method to our KNN class.
+KNN._get_k_nearest = _get_k_nearest
+```
+
 Now, you have helper functions to help you get the distances, and then get the k-nearest neighbors based on those distances. The final helper function you'll create will get the labels that correspond to each of the k-nearest point, and return the class that occurs the most. 
 
 Complete the `_get_label_prediction()` function in the cell below. This function should:
@@ -106,6 +167,19 @@ Complete the `_get_label_prediction()` function in the cell below. This function
 ```python
 def _get_label_prediction(self, k_nearest):
     pass
+
+# This line attaches the function we just created as a method to our KNN class.
+KNN._get_label_prediction = _get_label_prediction
+```
+
+
+```python
+# __SOLUTION__ 
+def _get_label_prediction(self, k_nearest):
+        
+    labels = [self.y_train[i] for i, _ in k_nearest]
+    counts = np.bincount(labels)
+    return np.argmax(counts)
 
 # This line attaches the function we just created as a method to our KNN class.
 KNN._get_label_prediction = _get_label_prediction
@@ -146,6 +220,23 @@ def predict(self, X_test, k=3):
 KNN.predict = predict
 ```
 
+
+```python
+# __SOLUTION__ 
+def predict(self, X_test, k=3):
+    preds = []
+    # Iterate through each item in X_test
+    for i in X_test:
+        # Get distances between i and each item in X_train
+        dists = self._get_distances(i)
+        k_nearest = self._get_k_nearest(dists, k)
+        predicted_label = self._get_label_prediction(k_nearest)
+        preds.append(predicted_label)
+    return preds
+        
+KNN.predict = predict
+```
+
 Great! Now, try out your new KNN classifier on a sample dataset to see how well it works!
 
 ## Testing Our KNN Classifier
@@ -165,11 +256,29 @@ data = iris.data
 target = iris.target
 ```
 
+
+```python
+# __SOLUTION__ 
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+
+iris = load_iris()
+data = iris.data
+target = iris.target
+```
+
 Now, you'll need to use `train_test_split` to split our training data into training and testing sets. Pass in the `data`, the `target`, and set a `test_size` of `0.25`.
 
 
 ```python
 X_train, X_test, y_train, y_test = None
+```
+
+
+```python
+# __SOLUTION__ 
+X_train, X_test, y_train, y_test = train_test_split(data, target, test_size=0.25)
 ```
 
 Now, instantiate a knn object, and `fit` it to the data in `X_train` and the labels in `y_train`.
@@ -179,11 +288,24 @@ Now, instantiate a knn object, and `fit` it to the data in `X_train` and the lab
 knn = None
 ```
 
+
+```python
+# __SOLUTION__ 
+knn = KNN()
+knn.fit(X_train, y_train)
+```
+
 Now, create some predictions on the test data.  In the cell below, use the `.predict()` method to generate predictions for the data stored in `X_test`.
 
 
 ```python
 preds = None
+```
+
+
+```python
+# __SOLUTION__ 
+preds = knn.predict(X_test)
 ```
 
 And now, for the moment of truth! Test the accuracy of your predictions. In the cell below, complete the call to `accuracy_score` by passing in `y_test` and our `preds`!
@@ -193,6 +315,16 @@ And now, for the moment of truth! Test the accuracy of your predictions. In the 
 print("Testing Accuracy: {}".format(accuracy_score(None, None)))
 # Expected Output: Testing Accuracy: 0.9736842105263158
 ```
+
+
+```python
+# __SOLUTION__ 
+print("Testing Accuracy: {}".format(accuracy_score(y_test, preds)))
+# Expected Output: Testing Accuracy: 0.9736842105263158
+```
+
+    Testing Accuracy: 0.9736842105263158
+
 
 Over 97% accuracy! Not bad for a handwritten machine learning classifier!
 
