@@ -19,7 +19,6 @@ You'll begin this lab by creating a classifier. To keep things simple, you'll be
 ```python
 from scipy.spatial.distance import euclidean
 import numpy as np
-np.random.seed(0)
 ```
 
 
@@ -27,7 +26,6 @@ np.random.seed(0)
 # __SOLUTION__ 
 from scipy.spatial.distance import euclidean
 import numpy as np
-np.random.seed(0)
 ```
 
 ## Create the `KNN` class
@@ -47,7 +45,7 @@ You will now:
 ```python
 # __SOLUTION__ 
 # Define the KNN class with two empty methods - fit and predict
-class KNN(object):
+class KNN:
     
     def fit():
         pass
@@ -103,7 +101,7 @@ In the cell below, complete the `_get_distances()` function. This function shoul
 
 
 ```python
-def _get_distances(self, x):
+def _get_distances():
     pass
 
 # This line attaches the function you just created as a method to KNN class 
@@ -165,7 +163,7 @@ Complete the `_get_label_prediction()` function in the cell below. This function
 
 
 ```python
-def _get_label_prediction(self, k_nearest):
+def _get_label_prediction():
     pass
 
 # This line attaches the function you just created as a method to KNN class
@@ -265,7 +263,7 @@ data = iris.data
 target = iris.target
 ```
 
-Use `train_test_split()` to split the data into training and test sets. Pass in the `data` and `target`, and set a `test_size` of `0.25`. 
+Use `train_test_split()` to split the data into training and test sets. Pass in the `data` and `target`, and set the `test_size` to 0.25 and `random_state` to 0. 
 
 
 ```python
@@ -275,7 +273,7 @@ X_train, X_test, y_train, y_test = None
 
 ```python
 # __SOLUTION__ 
-X_train, X_test, y_train, y_test = train_test_split(data, target, test_size=0.25)
+X_train, X_test, y_train, y_test = train_test_split(data, target, test_size=0.25, random_state=0)
 ```
 
 Now, instantiate the `KNN` class, and `fit` it to the data in `X_train` and the labels in `y_train`.
